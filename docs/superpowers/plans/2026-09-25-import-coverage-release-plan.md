@@ -6,7 +6,17 @@
 
 **Architecture:** Coverage is generated from source evidence + runtime implementation + tests. Missing evidence lowers status; it never produces guessed code.
 
+**Tech Stack:** Kotlin/JVM evidence tooling, Gradle, generated JSON/CSV/Markdown reports, Android instrumentation tests, trace replay, release build tooling.
+
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
+
+## Global Constraints
+- Coverage totals are derived from data, never hard-coded.
+- Missing/conflicting evidence lowers status instead of generating behavior.
+- Runtime packs are immutable/versioned and tied to exact source commits/hashes.
+- Real-vehicle writes require evidence-complete variants and safety-engine execution.
+- A platform cannot be labeled VEHICLE_VALIDATED without a real acceptance vehicle.
+
 
 ## Review Focus
 - source evidence commit changes under same feature ID;
