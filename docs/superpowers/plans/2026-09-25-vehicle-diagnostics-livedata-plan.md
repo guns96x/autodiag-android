@@ -6,7 +6,17 @@
 
 **Architecture:** OEM VAG supplies discovery/identity definitions; generic runtimes execute operation plans and produce canonical identities/results.
 
+**Tech Stack:** Kotlin, Coroutines/Flow, protocol runtime modules, OEM VAG definitions, FakeTransport trace replay, JUnit/Turbine.
+
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
+
+## Global Constraints
+- This plan remains read-only.
+- ECU presence/identity must come from protocol evidence, not vehicle-name assumptions.
+- Raw responses are preserved in diagnostic traces.
+- Live-data DID/PID/scaling definitions require exact evidence.
+- No write operation may be reachable during this phase.
+
 
 ## Review Focus
 - partial gateway response;
