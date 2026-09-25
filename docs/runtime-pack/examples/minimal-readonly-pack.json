@@ -1,0 +1,42 @@
+{
+  "manifest": {
+    "schemaVersion": 1,
+    "packId": "vag",
+    "packVersion": "0.1.0",
+    "buildCommit": "0000000000000000000000000000000000000000",
+    "sourceCommit": "0000000000000000000000000000000000000000",
+    "sourceArtifactHashes": {},
+    "generatedAt": 0,
+    "featureCount": 0,
+    "variantCount": 0,
+    "evidenceSummary": {
+      "EXACT": 0,
+      "PARTIAL": 0,
+      "UNRESOLVED": 0,
+      "CONFLICT": 0,
+      "PROTECTED": 0
+    },
+    "payloadHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "minAppSchemaVersion": 1
+  },
+  "payload": {
+    "oem": {
+      "manufacturer": "VAG",
+      "oemModule": "oem-vag"
+    },
+    "evidence": [],
+    "ecus": [],
+    "ecuVariants": [],
+    "whitelists": [],
+    "protocolProfiles": [],
+    "operationPlans": [],
+    "codecs": [],
+    "preconditions": [],
+    "features": [],
+    "variants": [],
+    "liveDataParameters": [],
+    "serviceProcedures": [],
+    "diagnosticOperations": [],
+    "platformRules": []
+  }
+}
