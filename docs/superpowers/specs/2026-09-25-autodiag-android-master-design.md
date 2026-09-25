@@ -1962,3 +1962,169 @@ UI
 ```
 
 If any executable path cannot be traced end-to-end, it is not accepted as complete.
+
+
+---
+
+## 57. Android Build Baseline
+
+Application namespace:
+
+```
+com.guns96x.autodiag
+```
+
+Build/runtime rules:
+
+- minimum Android API: 26;
+- JDK toolchain: 17;
+- Kotlin language level and Android Gradle Plugin are pinned in the version catalog;
+- compile/target SDK use the highest stable Android SDK supported by the pinned stable AGP at implementation lock time;
+- every dependency version is pinned; no dynamic `+` versions;
+- dependency locking is enabled for CI/release builds;
+- release builds are reproducible from a tagged source commit and runtime-pack version.
+
+Supported form factors:
+
+- Android phones;
+- Android tablets.
+
+Not part of the first product target:
+
+- Wear OS;
+- Android Auto projection UI;
+- Android Automotive OS native application.
+
+The domain/protocol modules must remain Android-framework-light enough to be reusable in future non-phone hosts.
+
+---
+
+## 58. Localization and Accessibility
+
+Initial application languages:
+
+- English;
+- Ukrainian.
+
+Rules:
+
+- all user-visible strings live in Android resources;
+- protocol names, raw diagnostic values and OEM identifiers remain technically exact rather than translated;
+- number/unit formatting respects locale without changing protocol payload semantics;
+- Compose screens must support dynamic text sizing;
+- controls require accessible labels;
+- status must never be communicated only by color;
+- service/write confirmations must remain usable with screen readers.
+
+---
+
+## 59. Privacy and Data Ownership
+
+Default policy:
+
+- vehicle data is stored locally;
+- diagnostic traces are stored locally;
+- backups are stored locally;
+- no advertising SDK;
+- no sale of user data;
+- analytics are absent by default;
+- optional telemetry/crash reporting, if ever added, requires explicit opt-in and a separate documented data schema.
+
+Export is user initiated.
+
+Potentially identifying fields such as VIN are never uploaded merely for normal local diagnostics.
+
+---
+
+## 60. Release Channels and Compatibility
+
+Release channels:
+
+```
+debug
+internal
+beta
+release
+```
+
+A release identifies:
+
+```
+appVersion
+gitCommit
+runtimePackVersion
+runtimePackSourceCommit
+schemaVersion
+buildTimestamp
+```
+
+Compatibility rules:
+
+- app downgrade must not silently destroy newer database data;
+- runtime-pack downgrade is explicit;
+- runtime packs are immutable once released;
+- a bad new runtime pack can be rolled back to the last valid installed pack;
+- database migrations are forward-tested from every supported release lineage.
+
+---
+
+## 61. Required Real-Vehicle Validation Baseline
+
+The first mandatory VAG real-vehicle acceptance target is:
+
+```
+VW Golf 5
+1.9 TDI BLS
+PQ35
+Bosch EDC16U34
+```
+
+It is used to validate:
+
+- Bluetooth/adapter connection;
+- TP2/KWP discovery where applicable;
+- ECU identification;
+- full read-only AutoScan;
+- DTC read;
+- live-data read paths with exact evidence;
+- confirmed coding/adaptation reads;
+- write transactions only for explicitly selected low-risk, evidence-complete features after backup/read-back tooling passes.
+
+Platform validation rules:
+
+- PQ-family write support cannot be labeled vehicle-validated until the required Golf 5 acceptance suite passes;
+- MQB write support requires at least one real MQB acceptance vehicle in addition to replay/golden-vector tests;
+- MEB write support requires at least one real MEB acceptance vehicle;
+- a platform with only static evidence and traces may be labeled evidence-ready or trace-validated, never vehicle-validated.
+
+---
+
+## 62. Required Engineering Documentation
+
+The completed repository must contain and keep synchronized:
+
+```
+docs/architecture/
+docs/protocols/
+docs/evidence/
+docs/runtime-pack/
+docs/testing/
+docs/release/
+docs/adr/
+```
+
+Required documents include:
+
+- architecture overview;
+- module dependency rules;
+- runtime-pack schema;
+- evidence-status rules;
+- variant resolution algorithm;
+- write transaction state machine;
+- protocol state-machine documentation;
+- adapter capability matrix;
+- supported platform/ECU matrix;
+- release/recovery procedure;
+- real-vehicle test procedure.
+
+Material architecture decisions are recorded as ADRs instead of being left only in commit messages.
