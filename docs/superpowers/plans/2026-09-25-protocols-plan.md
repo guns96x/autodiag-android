@@ -10,6 +10,14 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
 
+## Global Constraints
+- Protocol modules contain no OEM feature IDs, vehicle model assumptions, or UI logic.
+- All timing/retry behavior is deterministic and testable with a fake clock.
+- Unknown NRC/status values are preserved raw.
+- SecurityAccess remains an interface; no unauthorized key derivation or bypass logic.
+- Every evidenced request shape must have a golden-vector test before use by higher layers.
+
+
 ## Review Focus
 - ISO-TP sequence mismatch;
 - UDS NRC 0x78 response pending;
