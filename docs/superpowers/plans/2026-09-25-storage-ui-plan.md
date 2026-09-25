@@ -6,7 +6,17 @@
 
 **Architecture:** UI consumes application/use-case state only. Room stores normalized product history. Developer screens expose trace/evidence/variant explanations without bypassing runtime safety.
 
+**Tech Stack:** Jetpack Compose, Navigation Compose, ViewModel, Coroutines/Flow, Room, Hilt, Android resource localization, Compose UI tests.
+
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
+
+## Global Constraints
+- UI never sends raw diagnostic bytes.
+- UI write actions route only through application use cases and the safety engine.
+- English and Ukrainian resources are mandatory.
+- Unsupported/protected/ambiguous states must be explicit.
+- Backups and write transaction records are immutable.
+
 
 ## Review Focus
 - database migration from old schema;
