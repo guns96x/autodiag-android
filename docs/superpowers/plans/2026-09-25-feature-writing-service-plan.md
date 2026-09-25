@@ -6,7 +6,17 @@
 
 **Architecture:** Feature runtime selects exactly one applicable EXACT variant. Operation plans are executed by specialized runtimes. All writes are mediated by SafetyRuntime and immutable backups.
 
+**Tech Stack:** Kotlin, Coroutines/Flow, canonical runtime-pack models, UDS/KWP/TP2 protocol modules, JUnit, Turbine, deterministic FakeTransport/testkit.
+
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
+
+## Global Constraints
+- Only EXACT variants may become writable.
+- Variant selection must be deterministic from applicability, never array order.
+- All writes pass through `WriteTransactionEngine`.
+- TP2/KWP adaptation uses evidence-backed operation flows, not guessed single commands.
+- Protected/security-gated operations remain blocked unless a legitimate provider is available.
+
 
 ## Review Focus
 - two exact variants match;
