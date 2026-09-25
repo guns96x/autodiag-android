@@ -10,6 +10,14 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-25-autodiag-android-master-design.md`
 
+## Global Constraints
+- Transport modules move bytes only and contain no automotive protocol logic.
+- Adapter capability detection is empirical; unsupported features downgrade capability.
+- All connection APIs are cancellation-safe.
+- Disconnect/reconnect behavior is explicit and observable through state.
+- Adapter family/product names never imply capabilities without probing.
+
+
 ## Review Focus
 - permission denial;
 - disconnect mid-read;
